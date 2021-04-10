@@ -1,9 +1,8 @@
-import { usePosts } from '@wpengine/headless/react';
 import { getApolloClient, getPosts } from '@wpengine/headless';
 /**
- * Example getting with usePosts.
+ * Example getting with getPosts.
  * 
- * - This is "Client Side".
+ * - This is "SSR".
  * - We use the usePosts to get "Dynamically" all posts in an easy query.
  * - Check that it rerendeers twitce, so you need to add the "posts &&" on the map
  */
@@ -26,7 +25,6 @@ const Blog = ({ posts }) => {
         </div>
     );
 };
-
 
 
 export const getStaticProps = async (context) => {

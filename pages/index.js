@@ -23,9 +23,17 @@ export default function Home() {
         <Link href="/examples/use-post-dinamically">
           <a>Get All posts using usePosts (client side rendered)</a>
         </Link>
-        <Link href="/examples/use-post-ssr">
-          <a>Get All posts using usePosts (SSR)</a>
+        <Link href="/examples/get-post-ssr">
+          <a>Get All posts using getPosts (SSR)</a>
         </Link>
+
+        <Link href="/examples/use-post-and-get-next-static-props">
+          <a>Get All posts using getNextStaticProps (SSR)</a>
+        </Link>
+
+        {/* <Link href="/examples/get-next-static-props">
+          <a>Get All posts using getNextStaticProps (SSR)</a>
+        </Link> */}
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>

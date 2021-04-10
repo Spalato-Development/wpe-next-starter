@@ -4,7 +4,6 @@ import { gql } from '@apollo/client';
 import { getNextStaticProps } from '@wpengine/headless/next';
 
 const Blog = () => {
-  console.log("posts: ", posts)
   //   console.log('postsData', props);
   //   const { nodes: posts } = postsData;
   const posts = usePosts();
