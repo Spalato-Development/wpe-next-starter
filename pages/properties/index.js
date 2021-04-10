@@ -17,7 +17,8 @@ const GET_PROPERTIES = gql`
   }
 `;
 
-const Properties = () => {
+const Properties = (props) => {
+  console.log('props: ', props);
   const { data } = useQuery(GET_PROPERTIES);
   console.log('data', data);
   const properties = data?.properties?.nodes;

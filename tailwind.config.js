@@ -1,8 +1,8 @@
 // const config = require("./styles/themeConfig");
 module.exports = {
-  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
-  mode: "jit",
-  darkMode: "class", // or 'media' or 'class'
+  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  mode: 'jit',
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     // ...config,
     extend: {},
@@ -12,6 +12,6 @@ module.exports = {
   },
   plugins: [],
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
-}
+};
