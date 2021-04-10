@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
@@ -11,7 +12,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org">Webstantly WpNext.js starter!</a>
         </h1>
 
         <p className={styles.description}>
@@ -19,13 +20,19 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
+        <Link href="/examples/use-post-dinamically">
+          <a>Get All posts using usePosts (client side rendered)</a>
+        </Link>
+        <Link href="/examples/use-post-ssr">
+          <a>Get All posts using usePosts (SSR)</a>
+        </Link>
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
+          {/* <a href="https://nextjs.org/learn" className={styles.card}>
             <h3>Learn &rarr;</h3>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
@@ -46,7 +53,7 @@ export default function Home() {
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
-          </a>
+          </a> */}
         </div>
       </main>
 
