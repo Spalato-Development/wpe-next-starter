@@ -23,6 +23,10 @@ const Page = () => {
 export default Page;
 
 export const getStaticProps = async (context) => {
+
+  if (context.preview) {
+    console.log("Showing preview??? ")
+  }
   console.log('context', context);
   //   const client = getApolloClient(context);
 
