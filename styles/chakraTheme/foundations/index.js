@@ -1,6 +1,6 @@
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
-import config from '@/themeConfig';
+import config from '../../../themeConfig';
 
 const {
   colors,

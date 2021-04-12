@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+const rem = (px) => px / 16 + 'rem';
 const colors = require('./colors');
 
 module.exports = {
@@ -41,5 +42,15 @@ module.exports = {
   },
   fontSize: {
     ...defaultTheme.fontSize,
+    base: rem(16),
+    l: rem(36),
+    lp: rem(24),
+    h1d: rem(60),
+    h2d: rem(36),
+    h3d: rem(26),
+    h4d: rem(22),
+    upperH: rem(24),
+    headingAccentd: rem(48),
+    lucidad: rem(64),
   },
 };
