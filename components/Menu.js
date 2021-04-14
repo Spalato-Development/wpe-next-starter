@@ -11,7 +11,7 @@ const Menu = (props) => {
     <div>
       <h1>Menu</h1>
       {menuItems?.nodes?.map((item) => (
-        <h3>{item.label}</h3>
+        <h3 key={item.label}>{item.label}</h3>
       ))}
     </div>
   );

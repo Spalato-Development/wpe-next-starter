@@ -18,6 +18,8 @@ import {
   Input,
 } from '@chakra-ui/react';
 
+import appGetStaticProps from "../lib/api/appGetStaticProps";
+
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -130,3 +132,12 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async (context) => {
+
+  const props = await appGetStaticProps(context);
+  return {
+    props
+  }
+};
+

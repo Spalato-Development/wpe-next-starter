@@ -3,9 +3,9 @@ import { useGlobalData } from '../../lib/context/globalDataContext';
 const AllPosts = (props) => {
     const globalData = useGlobalData();
 
-    const { posts } = globalData
+    const { posts, properties } = globalData
     console.log("--> AllPosts globalData: ", globalData);
-    console.log("--> AllPosts props: ", props);
+    console.log("--> AllPosts properties: ", properties);
 
     return (
         <div>
