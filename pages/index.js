@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link'
 import styles from '../styles/Home.module.css';
 import {
   Button,
@@ -78,6 +79,12 @@ export default function Home() {
         <Link href="/examples/use-post-and-get-next-static-props">
           <a>Get All posts using getNextStaticProps (SSR)</a>
         </Link>
+
+        <Link href="/examples/fetch-global-data">
+          <a>Get Global Static Data</a>
+        </Link>
+
+
 
         {/* <Link href="/examples/get-next-static-props">
           <a>Get All posts using getNextStaticProps (SSR)</a>

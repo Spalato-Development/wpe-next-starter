@@ -7,35 +7,25 @@ import {
   getNextStaticProps,
 } from '@wpengine/headless/next';
 
-const GET_PTS = gql`
-  query($id: ID!) {
-    placeToStay(id: $id, idType: SLUG) {
-      ...placeToStayFragment
+const GET_ALL_PTS = gql`
+  query() {
+    placeToStay() {
+      title,
+      uri, 
+      slug,
+      id
     }
   }
-  ${placeToStayFragment}
+
 `;
 
-const PlaceToStay = ({ ptsData = {} }) => {
-  // const { data } = useQuery(GET_PTS);
-  const { placeToStay: pts } = ptsData.data;
-
-  return (
-    <div>
-      <h1>{pts.title}</h1>
-    </div>
-  );
-};
 
 export default PlaceToStay;
 
 export const getStaticProps = async (context) => {
   const client = getApolloClient(context);
   const ptsData = await client.query({
-    query: GET_PTS,
-    variables: {
-      id: context.params.slug,
-    },
+    query: GET_ALL_PTS
   });
 
   console.log('context', context, 'ptsData', ptsData);
