@@ -2,7 +2,12 @@ import AllPosts from '../../components/examples/AllPosts';
 // import { getApolloClient, getPosts } from '@wpengine/headless';
 // import { gql, useQuery } from '@apollo/client';
 
-import appGetStaticProps from "../../lib/api/appGetStaticProps";
+// Way 1
+// import { appGetStaticProps } from "../../lib/api/appGetStaticProps";
+// Way 2
+
+import { getStaticProps } from "../../lib/api/appGetStaticProps";
+
 
 /**
  * Example getting with usePosts SSR.
@@ -27,16 +32,26 @@ const Blog = (props) => {
     );
 };
 
-export const getStaticProps = async (context) => {
+/**
+ * Way 1: Build own `getStaticProps` and just use a builder function like `appGetStaticProps`
+ * 
+ */
+// export const getStaticProps = async (context) => {
 
-    const otherProps = {
-        properties: ['fakeProperty1', 'fakeProperty2']
-    }
-    const props = await appGetStaticProps(context, otherProps);
-    console.log("props: ", props)
-    return {
-        props
-    }
-};
+//     const otherProps = {
+//         properties: ['fakeProperty1', 'fakeProperty2']
+//     }
+//     const props = await appGetStaticProps(context, otherProps);
+//     console.log("props: ", props)
+//     return {
+//         props
+//     }
+// };
+
+/**
+ * Way 2: Export shared getStaticProps * 
+ */
+export { getStaticProps };
+
 
 export default Blog;
