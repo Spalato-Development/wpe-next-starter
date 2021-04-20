@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
 
+import { AuthContext } from "../../lib/context/authContext";
+
 import { WP_LOGIN_USER } from "../../lib/api/auth";
 
+// https://dev.to/ksushiva/authentication-with-react-js-9e4
 const Login = () => {
 
     const [state, setState] = React.useState({
         loggedUser: null,
         error: null
     });
+
+    const { setAuthData } = useContext(AuthContext);
 
     const [login, { loading, error }] = useMutation(WP_LOGIN_USER, {
         onCompleted: data => {
@@ -23,10 +28,22 @@ const Login = () => {
                 },
                 error: null
             })
+            setAuthData({
+                data: {
+                    loggedUser: {
+                        ...data.login.user,
+                        authToken: data.login.authToken
+
+                    }
+                }
+            })
             reset({})
         },
         onError: error => {
-            setLoginError(error.message);
+            setState({
+                ...state,
+                error: error.message
+            })
         }
     });
 
@@ -46,6 +63,7 @@ const Login = () => {
             ...state,
             loggedUser: null
         })
+        setAuthData(null);
     }
 
     const { loggedUser, error: loginError } = state;

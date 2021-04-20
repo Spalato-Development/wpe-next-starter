@@ -34,7 +34,8 @@ define( 'GRAPHQL_JWT_AUTH_SECRET_KEY', 'super-secret-key' );
 define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
-- Allow user's registartions in WP
+- Allow user's registrations in WP:
+  `general/settings/`
 - Add npm package
 
 ## Getting Started
