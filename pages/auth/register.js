@@ -2,59 +2,69 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 
-import { WP_LOGIN_USER } from "../../lib/api/auth";
+import { WP_REGISTER_USER } from "../../lib/api/auth";
 
-const Login = () => {
+const Register = () => {
 
-    const [loggedUser, setLoggedUser] = React.useState(null);
-    const [loginError, setLoginError] = React.useState(null);
+    const [state, setState] = React.useState({
+        loggedUser: null,
+        error: null
+    });
 
-    const [login, { loading, error }] = useMutation(WP_LOGIN_USER, {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [registerUser, { loading, error }] = useMutation(WP_REGISTER_USER, {
         onCompleted: data => {
-            setLoggedUser({
-                ...data.login.user,
-                authToken: data.login.authToken
-            })
+            setState({
+                ...state,
+                loggedUser: {
+                    ...data.registerUser.user,
 
-            setLoginError(null);
+                }
+            })
             reset({})
         },
         onError: error => {
-            setLoginError(error.message);
+            setState({
+                ...state,
+                error: error.message
+            })
         }
     });
 
-    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
-        login({
+        registerUser({
             variables: {
                 username: data.username,
-                password: data.password
+                email: data.email,
+                password: data.password,
             }
         })
     };
 
     const onLogout = () => {
-        // TODO: now is fake
-        setLoggedUser(null);
+        setState({
+            ...state,
+            loggedUser: null
+        })
     }
 
-    if (loading) return <p>Loging in ...!</p>;
+    const { loggedUser, error: registerError } = state;
+
+    if (loading) return <p>Registering ...!</p>;
 
     if (loggedUser) {
+        // TODO: we will redirect to "private area!"
         return (
             <div>
                 <h1>Welcome {loggedUser.username}</h1>
                 <div>
                     <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" onClick={onLogout}>Logout</button>
                 </div>
-
             </div>
         )
     }
 
     return (
-
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label className="block mb-2 text-indigo-500" htmlFor="username">Username</label>
@@ -65,6 +75,16 @@ const Login = () => {
                     name="username"
                 />
                 {errors.username && errors.username.type === "required" && <span className="text-red-300" >This field is required</span>}
+            </div>
+            <div>
+                <label className="block mb-2 text-indigo-500" htmlFor="email">Email</label>
+                <input
+                    {...register("email", { required: true })}
+                    className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"
+                    type="email"
+                    name="email"
+                />
+                {errors.email && errors.email.type === "required" && <span className="text-red-300" >This field is required</span>}
             </div>
             <div>
                 <label
@@ -80,14 +100,14 @@ const Login = () => {
                 />
                 {errors.password && errors.password.type === "required" && <span className="text-red-300" >This field is required</span>}
             </div>
-            {loginError && <div>
-                <p className="text-red-300">Loggin Error: {loginError}</p>
+            {registerError && <div>
+                <p className="text-red-300">Register error: {registerError}</p>
             </div>}
             <div>
-                <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit">Login</button>
+                <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit">Register</button>
             </div>
         </form>
     )
 }
 
-export default Login
+export default Register
