@@ -10,6 +10,33 @@ Go to `localhost:3000` to see some examples and check the `/examples`/ directory
 
 - [usePost && getNextStaticProps](https://www.loom.com/share/dc720e6d4dd14ef38a011b7a995ad56a)
 
+## Auth
+
+- We will be using `wp-graphql-auth`:
+
+- Install the plugin in wordpress
+- Add the tokens
+
+```
+** File Changes **
+-- .htaccess --
+
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+RewriteEngine on
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
+
+-- wp-config.php --
+
+define( 'GRAPHQL_JWT_AUTH_SECRET_KEY', 'super-secret-key' );
+
+define('JWT_AUTH_CORS_ENABLE', true);
+```
+
+- Allow user's registartions in WP
+- Add npm package
+
 ## Getting Started
 
 First, run the development server:

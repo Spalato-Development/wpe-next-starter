@@ -16,6 +16,7 @@ const {
   fontFamily,
   fontSize,
 } = config;
+
 const fromTailwindToChakra = (fonts) => {
   return Object.entries(fonts).reduce((acc, [key, value]) => {
     acc[key] = value[0];

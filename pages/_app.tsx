@@ -7,6 +7,13 @@ import theme from '../styles/chakraTheme/theme';
 import { GlobalDataProvider } from '../lib/context/globalDataContext';
 import '../styles/globals.css';
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
+const client = new ApolloClient({
+  uri: 'https://starter-next.gatsby-wp.com/graphql',
+  cache: new InMemoryCache(),
+});
+
 /* eslint-disable react/jsx-props-no-spreading */
 export default function App({
   Component,
@@ -17,9 +24,9 @@ export default function App({
     <GlobalDataProvider globalData={pageProps}>
       <HeadlessProvider pageProps={pageProps}>
         <ChakraProvider theme={theme}>
-          <Layout>
+          <ApolloProvider client={client}>
             <Component {...pageProps} />
-          </Layout>
+          </ApolloProvider>
         </ChakraProvider>
       </HeadlessProvider>
     </GlobalDataProvider>
