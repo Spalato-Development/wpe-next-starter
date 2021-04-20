@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
+import Link from 'next/link'
 
 import { WP_REGISTER_USER } from "../../lib/api/auth";
 
@@ -19,7 +20,8 @@ const Register = () => {
                 loggedUser: {
                     ...data.registerUser.user,
 
-                }
+                },
+                error: null
             })
             reset({})
         },
@@ -103,6 +105,14 @@ const Register = () => {
             {registerError && <div>
                 <p className="text-red-300">Register error: {registerError}</p>
             </div>}
+            <div>
+                <p>
+                    Already registered?
+                    <Link href="/auth/login">
+                        <a>Login</a>
+                    </Link>
+                </p>
+            </div>
             <div>
                 <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit">Register</button>
             </div>

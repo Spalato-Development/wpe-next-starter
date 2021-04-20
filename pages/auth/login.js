@@ -1,22 +1,28 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
+import Link from 'next/link'
 
 import { WP_LOGIN_USER } from "../../lib/api/auth";
 
 const Login = () => {
 
-    const [loggedUser, setLoggedUser] = React.useState(null);
-    const [loginError, setLoginError] = React.useState(null);
+    const [state, setState] = React.useState({
+        loggedUser: null,
+        error: null
+    });
 
     const [login, { loading, error }] = useMutation(WP_LOGIN_USER, {
         onCompleted: data => {
-            setLoggedUser({
-                ...data.login.user,
-                authToken: data.login.authToken
-            })
+            setState({
+                ...state,
+                loggedUser: {
+                    ...data.login.user,
+                    authToken: data.login.authToken
 
-            setLoginError(null);
+                },
+                error: null
+            })
             reset({})
         },
         onError: error => {
@@ -24,7 +30,7 @@ const Login = () => {
         }
     });
 
-    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
         login({
             variables: {
@@ -36,8 +42,13 @@ const Login = () => {
 
     const onLogout = () => {
         // TODO: now is fake
-        setLoggedUser(null);
+        setState({
+            ...state,
+            loggedUser: null
+        })
     }
+
+    const { loggedUser, error: loginError } = state;
 
     if (loading) return <p>Loging in ...!</p>;
 
@@ -83,6 +94,14 @@ const Login = () => {
             {loginError && <div>
                 <p className="text-red-300">Loggin Error: {loginError}</p>
             </div>}
+            <div>
+                <p>
+                    Are you new?
+                    <Link href="/auth/register">
+                        <a>Register</a>
+                    </Link>
+                </p>
+            </div>
             <div>
                 <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit">Login</button>
             </div>
