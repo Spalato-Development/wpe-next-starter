@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link'
 import styles from '../styles/Home.module.css';
 import {
@@ -25,90 +24,62 @@ export default function Home() {
   const btnRef = React.useRef();
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      <h1 className={styles.title}>
+        Welcome to <a href="https://nextjs.org">Webstantly WpNext starter!</a>
+      </h1>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Webstantly WpNext.js starter!</a>
-        </h1>
-        <VStack>
-          <Button>Button</Button>
-          <Box sx={{ bg: 'red' }}>Box</Box>
-        </VStack>
-        <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-          Open
-        </Button>
-        <Drawer
-          isOpen={isOpen}
-          placement="right"
-          onClose={onClose}
-          finalFocusRef={btnRef}>
-          <DrawerOverlay>
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader>Create your account</DrawerHeader>
 
-              <DrawerBody>
-                <Input placeholder="Type here..." />
-              </DrawerBody>
+      <h2>Some examples for getStaticProps</h2>
 
-              <DrawerFooter>
-                <Button variant="outline" mr={3} onClick={onClose}>
-                  Cancel
+      <Link href="/examples/use-post-dinamically">
+        <a>Get All posts using usePosts (client side rendered)</a>
+      </Link>
+      <Link href="/examples/get-post-ssr">
+        <a>Get All posts using getPosts (SSR)</a>
+      </Link>
+
+      <Link href="/examples/use-post-and-get-next-static-props">
+        <a>Get All posts using getNextStaticProps (SSR)</a>
+      </Link>
+
+      <Link href="/examples/fetch-global-data">
+        <a>Get Global Static Data</a>
+      </Link>
+
+
+      <h2>UI Examples</h2>
+      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+        Open Lateral Menu
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Create your account</DrawerHeader>
+
+            <DrawerBody>
+              <Input placeholder="Type here..." />
+            </DrawerBody>
+
+            <DrawerFooter>
+              <Button variant="outline" mr={3} onClick={onClose}>
+                Cancel
                 </Button>
-                <Button colorScheme="blue">Save</Button>
-              </DrawerFooter>
-            </DrawerContent>
-          </DrawerOverlay>
-        </Drawer>
+              <Button colorScheme="blue">Save</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <Link href="/examples/use-post-dinamically">
-          <a>Get All posts using usePosts (client side rendered)</a>
-        </Link>
-        <Link href="/examples/get-post-ssr">
-          <a>Get All posts using getPosts (SSR)</a>
-        </Link>
-
-        <Link href="/examples/use-post-and-get-next-static-props">
-          <a>Get All posts using getNextStaticProps (SSR)</a>
-        </Link>
-
-        <Link href="/examples/fetch-global-data">
-          <a>Get Global Static Data</a>
-        </Link>
-
-
-
-        {/* <Link href="/examples/get-next-static-props">
+      {/* <Link href="/examples/get-next-static-props">
           <a>Get All posts using getNextStaticProps (SSR)</a>
         </Link> */}
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer">
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
 

@@ -5,8 +5,6 @@ const Menu = (props) => {
   const { menuData } = globalData;
   const { menuItems } = menuData?.data?.menu || {};
 
-  console.log('menuData', menuData);
-  console.log('menuItems', menuItems);
   return (
     <div>
       <h1>Menu</h1>

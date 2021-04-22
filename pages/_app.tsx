@@ -32,7 +32,9 @@ export default function App({
         <AuthProvider>
           <ChakraProvider theme={theme}>
             <ApolloProvider client={client}>
+              {/* <Layout> */}
               <Component {...pageProps} />
+              {/* </Layout> */}
             </ApolloProvider>
           </ChakraProvider>
         </AuthProvider>

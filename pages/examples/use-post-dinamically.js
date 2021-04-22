@@ -9,8 +9,6 @@ import { usePosts } from '@wpengine/headless/react';
  */
 const Blog = () => {
     const posts = usePosts();
-    console.log('posts', posts);
-
     return (
         <div>
             <h1>usePosts</h1>

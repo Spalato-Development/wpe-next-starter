@@ -22,8 +22,6 @@ import { getStaticProps } from "../../lib/api/appGetStaticProps";
  */
 
 const Blog = (props) => {
-    console.log('Blog props', props);
-
     return (
         <div>
             <h1>AllPosts example with global data</h1>
@@ -42,7 +40,6 @@ const Blog = (props) => {
 //         properties: ['fakeProperty1', 'fakeProperty2']
 //     }
 //     const props = await appGetStaticProps(context, otherProps);
-//     console.log("props: ", props)
 //     return {
 //         props
 //     }

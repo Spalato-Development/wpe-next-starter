@@ -10,8 +10,6 @@ import {
 const Page = () => {
   const page = usePost();
   const settings = useGeneralSettings();
-  console.log('page', page, 'settings', settings);
-
   return (
     <div>
       <h1>{page?.title}</h1>
@@ -23,7 +21,6 @@ const Page = () => {
 export default Page;
 
 export const getStaticProps = async (context) => {
-  console.log('context', context);
   //   const client = getApolloClient(context);
 
   const props = await getNextStaticProps(context);
