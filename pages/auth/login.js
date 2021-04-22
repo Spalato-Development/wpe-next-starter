@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
-
+import Router from 'next/router'
 import { AuthContext } from "../../lib/context/authContext";
 
 import { WP_LOGIN_USER } from "../../lib/api/auth";
@@ -15,7 +15,9 @@ const Login = () => {
         error: null
     });
 
-    const { setAuthData } = useContext(AuthContext);
+    const { setAuthData, auth: { loading: fechingUserInSession, loggedUser: userInSession } } = useContext(AuthContext);
+
+
 
     const [login, { loading, error }] = useMutation(WP_LOGIN_USER, {
         onCompleted: data => {
@@ -32,10 +34,10 @@ const Login = () => {
                 loggedUser: {
                     ...data.login.user,
                     authToken: data.login.authToken
-
                 }
             })
             reset({})
+            Router.push("/dashboard")
         },
         onError: error => {
             setState({
@@ -63,6 +65,12 @@ const Login = () => {
         })
         setAuthData(null);
     }
+
+    useEffect(() => {
+        if (!fechingUserInSession && userInSession) {
+            Router.push("/dashboard")
+        }
+    }, [userInSession, fechingUserInSession])
 
     const { loggedUser, error: loginError } = state;
 
