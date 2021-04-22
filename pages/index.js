@@ -47,6 +47,19 @@ export default function Home() {
         <a>Get Global Static Data</a>
       </Link>
 
+      <h2>Auth</h2>
+
+      <Link href="/auth/register">
+        <a>Register user</a>
+      </Link>
+
+      <Link href="/auth/login">
+        <a>Login user</a>
+      </Link>
+
+      <Link href="/dashboard">
+        <a>Private Dashboard</a>
+      </Link>
 
       <h2>UI Examples</h2>
       <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>

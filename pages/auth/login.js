@@ -29,12 +29,10 @@ const Login = () => {
                 error: null
             })
             setAuthData({
-                data: {
-                    loggedUser: {
-                        ...data.login.user,
-                        authToken: data.login.authToken
+                loggedUser: {
+                    ...data.login.user,
+                    authToken: data.login.authToken
 
-                    }
                 }
             })
             reset({})

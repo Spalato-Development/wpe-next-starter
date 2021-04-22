@@ -4,25 +4,25 @@ import { AuthContext } from "../../lib/context/authContext";
 
 const Dashboard = () => {
 
-    const { auth } = useContext(AuthContext);
-    const { loading } = auth;
+    const { auth: { loading, loggedUser } } = useContext(AuthContext);
 
     useEffect(() => {
-        // if (!loading && (!auth || !auth.data)) {
-        if ((!auth || !auth.data)) {
+        if (!loading && !loggedUser) {
             Router.push("/auth/login")
         }
-    }, [auth])
+    }, [loggedUser, loading])
 
     if (loading) {
         return <p>Loading ...</p>
     }
 
-    console.log("auth.data: ", auth.data)
     return (
         <>
             <h1>Dashboard</h1>
-            {/* <h2>{auth.data.name}</h2> */}
+            {
+                loggedUser &&
+                <h2>{`Welcome ${loggedUser.name}!`}</h2>
+            }
         </>
     )
 }
