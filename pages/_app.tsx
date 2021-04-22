@@ -12,7 +12,6 @@ export default function App({
   Component,
   pageProps,
 }: AppContext & AppInitialProps) {
-  console.log('pageProps: ', pageProps);
   return (
     <GlobalDataProvider globalData={pageProps}>
       <HeadlessProvider pageProps={pageProps}>

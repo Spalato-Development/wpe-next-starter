@@ -13,7 +13,6 @@ import { getNextStaticProps } from '@wpengine/headless/next';
  */
 const Blog = (props) => {
     const posts = usePosts();
-    console.log('posts', posts);
     return (
         <div>
             <h1>usePosts</h1>

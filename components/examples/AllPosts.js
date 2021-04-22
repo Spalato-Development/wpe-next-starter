@@ -4,8 +4,6 @@ const AllPosts = (props) => {
     const globalData = useGlobalData();
 
     const { posts, properties } = globalData
-    console.log("--> AllPosts globalData: ", globalData);
-    console.log("--> AllPosts properties: ", properties);
 
     return (
         <div>

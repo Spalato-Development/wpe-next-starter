@@ -7,10 +7,6 @@ import { getApolloClient, getPosts } from '@wpengine/headless';
  * - Check that it rerendeers twitce, so you need to add the "posts &&" on the map
  */
 const Blog = ({ posts }) => {
-
-
-    console.log('posts', posts);
-
     return (
         <div>
             <h1>usePosts</h1>
