@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Introduction
+
+Boilerplate code for Webstantly NextJS derived applications.
+
+Go to `localhost:3000` to see some examples and check the `/examples`/ directory to check information.
+
+- Some looms:
+
+- [usePost && getNextStaticProps](https://www.loom.com/share/dc720e6d4dd14ef38a011b7a995ad56a)
+
 ## Getting Started
 
 First, run the development server:
