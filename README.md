@@ -38,6 +38,9 @@ define('JWT_AUTH_CORS_ENABLE', true);
   `general/settings/`
 - Add npm package
 
+
+https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+
 ## Getting Started
 
 First, run the development server:
