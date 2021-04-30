@@ -38,7 +38,6 @@ define('JWT_AUTH_CORS_ENABLE', true);
   `general/settings/`
 - Add npm package
 
-
 https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 
 ## Getting Started
@@ -73,3 +72,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+https://dev.to/vadorequest/a-2021-guide-about-structuring-your-next-js-project-in-a-flexible-and-efficient-way-472
