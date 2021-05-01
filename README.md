@@ -40,9 +40,13 @@ define('JWT_AUTH_CORS_ENABLE', true);
 
 https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 
+-- To change Reset Email and New user email please go to this [Kellen Mace repo](https://github.com/kellenmace/run-through-history-backend) to learn how to do it.
+
+- I am creating a basic plugin for this also
+
 ## Getting Started
 
-First, run the development server:
+First, run the development server: https://github.com/carlosloureda/wbs-headless-auth-plugin
 
 ```bash
 npm run dev
@@ -74,3 +78,5 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 https://dev.to/vadorequest/a-2021-guide-about-structuring-your-next-js-project-in-a-flexible-and-efficient-way-472
+
+<!-- /set-password/?key=bnGWVX40SOHAFQsS30Vb&login=carlos -->
