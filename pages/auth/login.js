@@ -114,6 +114,12 @@ const Login = () => {
                         <a>Register</a>
                     </Link>
                 </p>
+                <p>
+                    Forgot password?
+                    <Link href="/auth/forgot-password">
+                        <a>Recover</a>
+                    </Link>
+                </p>
             </div>
             <div>
                 <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit">Login</button>

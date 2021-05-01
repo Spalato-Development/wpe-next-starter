@@ -3,28 +3,24 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
 import Router from 'next/router'
-import { AuthContext } from "../../lib/context/authContext";
+import useAuth from "../../lib/hooks/useAuth"
 
 import { WP_SEND_PASSWORD_RESET } from "../../lib/api/auth";
 
 // https://dev.to/ksushiva/authentication-with-react-js-9e4
 const ForgotPassword = () => {
 
-    // const [state, setState] = React.useState({
-    //     loggedUser: null,
-    //     error: null
-    // });
-
+    const [emailSent, setEmailSent] = React.useState(false);
     const [forgotPassword, { loading, error }] = useMutation(WP_SEND_PASSWORD_RESET, {
         onCompleted: data => {
-           console.log("data: ", data)
+            setEmailSent(true);
         },
         onError: error => {
             console.log("error: ", error)
         }
     });
-
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
     const onSubmit = data => {
         forgotPassword({
             variables: {
@@ -33,13 +29,16 @@ const ForgotPassword = () => {
         })
     };
 
-    /* useEffect(() => {
-        if (!fechingUserInSession && userInSession) {
-            Router.push("/dashboard")
-        }
-    }, [userInSession, fechingUserInSession]) */
-
     if (loading) return <p>Sending email in ...!</p>;
+
+    if (emailSent) return (
+        <div>
+            <p>Email sent. Check your inbox!</p>
+            <Link href="/auth/login">
+                <a>Go to Login</a>
+            </Link>
+        </div>
+    )
 
     return (
 
