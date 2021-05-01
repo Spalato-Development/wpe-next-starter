@@ -1,13 +1,16 @@
 import React from 'react';
 import { AppContext, AppInitialProps } from 'next/app';
 import { HeadlessProvider } from '@wpengine/headless/react';
+import { AuthProvider } from '../lib/hooks/useAuth';
 import { Layout } from '../components';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '../styles/chakraTheme/theme';
 import { GlobalDataProvider } from '../lib/context/globalDataContext';
 import '../styles/globals.css';
 
-/* eslint-disable react/jsx-props-no-spreading */
+import { ApolloProvider } from '@apollo/client/react';
+import { client } from '../lib/services/apollo';
+
 export default function App({
   Component,
   pageProps,
@@ -15,12 +18,28 @@ export default function App({
   return (
     <GlobalDataProvider globalData={pageProps}>
       <HeadlessProvider pageProps={pageProps}>
-        <ChakraProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ChakraProvider>
+        <AuthProvider>
+          <ChakraProvider theme={theme}>
+            <ApolloProvider client={client}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ApolloProvider>
+          </ChakraProvider>
+        </AuthProvider>
       </HeadlessProvider>
     </GlobalDataProvider>
   );
 }
+
+// window.addEventListener('storage', (e) => {
+//   if (e.key === 'access_token' && e.oldValue && !e.newValue) {
+//     store.dispatch(userSignOut());
+//   }
+// });
+
+// window.addEventListener('storage', function(event){
+//   if (event.key == 'logout-event') {
+//       // ..
+//   }
+// });

@@ -10,9 +10,43 @@ Go to `localhost:3000` to see some examples and check the `/examples`/ directory
 
 - [usePost && getNextStaticProps](https://www.loom.com/share/dc720e6d4dd14ef38a011b7a995ad56a)
 
+## Auth
+
+- We will be using `wp-graphql-auth`:
+
+- Install the plugin in wordpress
+- Add the tokens
+
+```
+** File Changes **
+-- .htaccess --
+
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+RewriteEngine on
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
+
+-- wp-config.php --
+
+define( 'GRAPHQL_JWT_AUTH_SECRET_KEY', 'super-secret-key' );
+
+define('JWT_AUTH_CORS_ENABLE', true);
+```
+
+- Allow user's registrations in WP:
+  `general/settings/`
+- Add npm package
+
+https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+
+-- To change Reset Email and New user email please go to this [Kellen Mace repo](https://github.com/kellenmace/run-through-history-backend) to learn how to do it.
+
+- I am creating a basic plugin for this also
+
 ## Getting Started
 
-First, run the development server:
+First, run the development server: https://github.com/carlosloureda/wbs-headless-auth-plugin
 
 ```bash
 npm run dev
@@ -42,3 +76,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+https://dev.to/vadorequest/a-2021-guide-about-structuring-your-next-js-project-in-a-flexible-and-efficient-way-472
+
+<!-- /set-password/?key=bnGWVX40SOHAFQsS30Vb&login=carlos -->
