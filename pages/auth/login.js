@@ -3,51 +3,47 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
 import Router from 'next/router'
-import { AuthContext } from "../../lib/context/authContext";
-
+// import { AuthContext } from "../../lib/context/authContext";
+import useAuth from "../../lib/hooks/useAuth"
 import { WP_LOGIN_USER } from "../../lib/api/auth";
 
 // https://dev.to/ksushiva/authentication-with-react-js-9e4
 const Login = () => {
 
     const [state, setState] = React.useState({
-        loggedUser: null,
         error: null
     });
 
-    const { setAuthData, auth: { loading: fechingUserInSession, loggedUser: userInSession } } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-
+    const { isLoggedIn, user, setAuthData, deleteAuthData } = useAuth()
 
     const [login, { loading, error }] = useMutation(WP_LOGIN_USER, {
         onCompleted: data => {
             setState({
-                ...state,
-                loggedUser: {
-                    ...data.login.user,
-                    authToken: data.login.authToken
-
-                },
                 error: null
             })
             setAuthData({
-                loggedUser: {
-                    ...data.login.user,
-                    authToken: data.login.authToken
-                }
+                authToken: data.login.authToken,
+                refreshToken: data.login.user.jwtRefreshToken,
+                user: data.login.user
             })
             reset({})
-            Router.push("/dashboard")
+            // Router.push("/dashboard")
         },
         onError: error => {
             setState({
-                ...state,
                 error: error.message
             })
         }
     });
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    useEffect(() => {
+        if (isLoggedIn) {
+            Router.push("/dashboard")
+        }
+    }, [isLoggedIn])
+
     const onSubmit = data => {
         login({
             variables: {
@@ -58,28 +54,22 @@ const Login = () => {
     };
 
     const onLogout = () => {
-        // TODO: now is fake
-        setState({
-            ...state,
-            loggedUser: null
-        })
-        setAuthData(null);
+        deleteAuthData();
     }
 
-    useEffect(() => {
-        if (!fechingUserInSession && userInSession) {
-            Router.push("/dashboard")
-        }
-    }, [userInSession, fechingUserInSession])
+    // useEffect(() => {
+    //     if (!fechingUserInSession && userInSession) {
+    //         Router.push("/dashboard")
+    //     }
+    // }, [userInSession, fechingUserInSession])
 
-    const { loggedUser, error: loginError } = state;
+    const { error: loginError } = state;
 
     if (loading) return <p>Loging in ...!</p>;
-
-    if (loggedUser) {
+    if (isLoggedIn) {
         return (
             <div>
-                <h1>Welcome {loggedUser.username}</h1>
+                <h1>Welcome {user.username}</h1>
                 <div>
                     <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" onClick={onLogout}>Logout</button>
                 </div>

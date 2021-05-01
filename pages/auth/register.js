@@ -7,12 +7,14 @@ import { WP_REGISTER_USER } from "../../lib/api/auth";
 
 const Register = () => {
 
+    // local
     const [state, setState] = React.useState({
         loggedUser: null,
         error: null
     });
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
     const [registerUser, { loading, error }] = useMutation(WP_REGISTER_USER, {
         onCompleted: data => {
             setState({

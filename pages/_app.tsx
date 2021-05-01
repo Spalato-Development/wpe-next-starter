@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppContext, AppInitialProps } from 'next/app';
 import { HeadlessProvider } from '@wpengine/headless/react';
-import AuthProvider from '../lib/context/authContext';
+import { AuthProvider } from '../lib/hooks/useAuth';
 import { Layout } from '../components';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '../styles/chakraTheme/theme';
@@ -9,7 +9,7 @@ import { GlobalDataProvider } from '../lib/context/globalDataContext';
 import '../styles/globals.css';
 
 import { ApolloProvider } from '@apollo/client/react';
-import { client } from '../services/apollo';
+import { client } from '../lib/services/apollo';
 
 export default function App({
   Component,
