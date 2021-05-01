@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
 import Router from 'next/router'
-// import { AuthContext } from "../../lib/context/authContext";
 import useAuth from "../../lib/hooks/useAuth"
 import { WP_LOGIN_USER } from "../../lib/api/auth";
 

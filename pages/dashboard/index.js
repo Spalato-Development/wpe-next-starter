@@ -1,24 +1,25 @@
 import React, { useContext, useEffect } from "react";
 import Router from 'next/router'
-import { AuthContext } from "../../lib/context/authContext";
+import useAuth from "../../lib/hooks/useAuth"
 
 const Dashboard = () => {
 
-    const { auth: { loading, loggedUser }, setAuthData } = useContext(AuthContext);
+    const { isLoggedIn, user, deleteAuthData, isLoading } = useAuth()
 
+    // TODO:
     useEffect(() => {
-        if (!loading && !loggedUser) {
+        if (!isLoading && !isLoggedIn) {
             Router.push("/auth/login")
         }
-    }, [loggedUser, loading])
+    }, [isLoading, isLoggedIn])
 
 
     const onLogout = () => {
-        setAuthData(null);
+        deleteAuthData();
         Router.push("/auth/login")
     }
 
-    if (loading) {
+    if (isLoading) {
         return <p>Loading ...</p>
     }
 
@@ -26,9 +27,9 @@ const Dashboard = () => {
         <>
             <h1>Dashboard</h1>
             {
-                loggedUser &&
+                user &&
                 <>
-                    <h2>{`Welcome ${loggedUser.name}!`}</h2>
+                    <h2>{`Welcome ${user.name}!`}</h2>
                     <div>
                         <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" onClick={onLogout}>Logout</button>
                     </div>

@@ -1,37 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Link from 'next/link'
-
+import useAuth from "../../lib/hooks/useAuth"
 import { WP_REGISTER_USER } from "../../lib/api/auth";
+import Router from 'next/router'
 
 const Register = () => {
 
-    // local
-    const [state, setState] = React.useState({
-        loggedUser: null,
-        error: null
-    });
-
+    const { isLoggedIn, setAuthData } = useAuth()
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
     const [registerUser, { loading, error }] = useMutation(WP_REGISTER_USER, {
         onCompleted: data => {
-            setState({
-                ...state,
-                loggedUser: {
-                    ...data.registerUser.user,
-
-                },
-                error: null
+            setAuthData({
+                authToken: data.registerUser.user.authToken,
+                refreshToken: data.registerUser.user.jwtRefreshToken,
+                user: data.registerUser.user
             })
             reset({})
         },
         onError: error => {
-            setState({
-                ...state,
-                error: error.message
-            })
+            console.log("error: ", error.message)
         }
     });
 
@@ -45,28 +34,13 @@ const Register = () => {
         })
     };
 
-    const onLogout = () => {
-        setState({
-            ...state,
-            loggedUser: null
-        })
-    }
-
-    const { loggedUser, error: registerError } = state;
+    useEffect(() => {
+        if (isLoggedIn) {
+            Router.push("/dashboard")
+        }
+    }, [isLoggedIn])
 
     if (loading) return <p>Registering ...!</p>;
-
-    if (loggedUser) {
-        // TODO: we will redirect to "private area!"
-        return (
-            <div>
-                <h1>Welcome {loggedUser.username}</h1>
-                <div>
-                    <button className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" onClick={onLogout}>Logout</button>
-                </div>
-            </div>
-        )
-    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -104,8 +78,8 @@ const Register = () => {
                 />
                 {errors.password && errors.password.type === "required" && <span className="text-red-300" >This field is required</span>}
             </div>
-            {registerError && <div>
-                <p className="text-red-300">Register error: {registerError}</p>
+            {error && <div>
+                <p className="text-red-300">Register error: {error.message}</p>
             </div>}
             <div>
                 <p>
